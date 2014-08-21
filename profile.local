@@ -7,29 +7,29 @@
 # Adapted from default openSUSE style by Don Ellis for Omnitec
 # Essentially, the test for $UID == 0 has been removed.
 #
-    PATH=/usr/local/bin:/usr/bin:/bin
-    if test "$HOME" != "/" ; then
-	for dir in $HOME/bin/$CPU $HOME/bin ; do
-	    test -d $dir && PATH=$dir:$PATH
-	done
-    fi
+PATH=/usr/local/bin:/usr/bin:/bin
+if test "$HOME" != "/" ; then
+for dir in $HOME/bin/$CPU $HOME/bin ; do
+    test -d $dir && PATH=$dir:$PATH
+done
+fi
 #    if test "$UID" = 0 ; then
-	test -d /opt/kde3/sbin  && PATH=/opt/kde3/sbin:$PATH
-	PATH=/sbin:/usr/sbin:/usr/local/sbin:$PATH
+test -d /opt/kde3/sbin  && PATH=/opt/kde3/sbin:$PATH
+PATH=/sbin:/usr/sbin:/usr/local/sbin:$PATH
 #    fi
-    for dir in	/usr/X11/bin \
-		/usr/bin/X11 \
-		/usr/X11R6/bin \
-		/var/lib/dosemu \
-		/usr/games \
-		/opt/bin \
-		/opt/kde3/bin \
-		/opt/kde2/bin \
-		/opt/kde/bin \
-		/usr/openwin/bin \
-		/opt/cross/bin
-    do
-	test -d $dir && PATH=$PATH:$dir
-    done
-    unset dir
-    export PATH
+for dir in	/usr/X11/bin \
+    /usr/bin/X11 \
+    /usr/X11R6/bin \
+    /var/lib/dosemu \
+    /usr/games \
+    /opt/bin \
+    /opt/kde3/bin \
+    /opt/kde2/bin \
+    /opt/kde/bin \
+    /usr/openwin/bin \
+    /opt/cross/bin
+do
+    test -d $dir && PATH=$PATH:$dir
+done
+unset dir
+export PATH

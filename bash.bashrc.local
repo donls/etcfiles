@@ -1,9 +1,6 @@
 # /etc/bash.bashrc for SuSE Linux
 # Derived from /etc/bash.bashrc by D Ellis for Omnitec
 
-
-
-
 # If set: do not follow sym links
 # set -P
 #
