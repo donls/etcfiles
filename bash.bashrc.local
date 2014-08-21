@@ -1,0 +1,69 @@
+# /etc/bash.bashrc for SuSE Linux
+# Derived from /etc/bash.bashrc by D Ellis for Omnitec
+
+
+
+
+# If set: do not follow sym links
+# set -P
+#
+# Other prompting for root
+_t=""
+if test "$UID" -eq 0  ; then
+    _u="\h"
+    # _p=" #"
+else
+    _u="\u@\h"
+    # _p=">"
+    if test \( "$TERM" = "xterm" -o "${TERM#screen}" != "$TERM" \) \
+	    -a -z "$EMACS" -a -z "$MC_SID" -a -n "$DISPLAY"
+    then
+		_t="\$(ppwd \l)"
+    fi
+    if test -n "$restricted" ; then
+		_t=""
+    fi
+fi
+case "$(declare -p PS1 2> /dev/null)" in
+*-x*PS1=*)
+    ;;
+*)
+    # With full path on prompt
+#   PS1="\n${_t}${_u}:\w\n\$ "
+#	    # With short path on prompt
+#	    PS1="${_t}${_u}:\$(spwd)${_p} "
+#	    # With physical path even if reached over sym link
+#	    PS1="${_t}${_u}:\$(pwd -P)${_p} "
+    ;;
+esac
+# Colored root prompt (see bugzilla #144620)
+if test "$UID" -eq 0 -a -t ; then
+	_color="\[\033[01;31m\]"
+#	    _bred="$(path tput bold 2> /dev/null; path tput setaf 1 2> /dev/null)"
+#	    _sgr0="$(path tput sgr0 2> /dev/null)"
+#	    unset _bred _sgr0
+else
+	_color="\[\033[01;32m\]"
+fi
+PS1="\n$_color\u\[\033[00m\]@\h:\[\033[01;34m\]\w\[\033[00m\]\n\\$ "
+# unset _u _p _t
+unset _u _t
+unset _color
+
+# End of custom PS1 settings
+
+# Custom alias settings
+
+alias back='set back="$old"; set old="$cwd"; cd "$back"; unset back; dirs'
+alias c='clear'
+alias e='exit'
+alias h='history'
+alias sh='egrep '\''^Host'\'' .ssh/config'
+alias sx='screen -x'
+alias z='suspend'
+
+alias ls='ls -F --color=auto'
+alias path='echo $PATH | tr ":" "\n"'
+
+# # Set vi mode for history editing
+# set -o vi
